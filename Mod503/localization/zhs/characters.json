@@ -1,0 +1,17 @@
+{
+  "MOD503_CHARACTER_DICER.aromaPrinciple": "[sine][blue] “运势” 与 “点数”。靠投掷“命运骰子”获取数值。[/blue][/sine]",
+  "MOD503_CHARACTER_DICER.banter.alive.endTurnPing": "回合结束。",
+  "MOD503_CHARACTER_DICER.banter.dead.endTurnPing": "我先撤退。",
+  "MOD503_CHARACTER_DICER.cardsModifierDescription": "骰子的卡牌现在会出现在奖励和商店中。",
+  "MOD503_CHARACTER_DICER.cardsModifierTitle": "骰子卡牌",
+  "MOD503_CHARACTER_DICER.description": "骰子\n 投掷“命运骰子”获取数值。祝你好运",
+  "MOD503_CHARACTER_DICER.eventDeathPrevention": "模板角色继续坚持。",
+  "MOD503_CHARACTER_DICER.goldMonologue": "赌徒的金币。",
+  "MOD503_CHARACTER_DICER.possessiveAdjective": "他的",
+  "MOD503_CHARACTER_DICER.pronounObject": "他",
+  "MOD503_CHARACTER_DICER.pronounPossessive": "他的",
+  "MOD503_CHARACTER_DICER.pronounSubject": "他",
+  "MOD503_CHARACTER_DICER.title": "骰子",
+  "MOD503_CHARACTER_DICER.titleObject": "骰子",
+  "MOD503_CHARACTER_DICER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。"
+}

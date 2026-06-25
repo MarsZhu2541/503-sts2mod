@@ -1,0 +1,8 @@
+{
+    "MOD503_CARD_CHEAT_ATTACK.title": "笑里藏刀",
+    "MOD503_CARD_CHEAT_ATTACK.description": "造成{Damage:diff()}点伤害。",
+    "MOD503_CARD_DICE_ATTACK.title": "骰子攻击",
+    "MOD503_CARD_DICE_ATTACK.description": "造成[blue]{Damage:diff()} + 骰子点数[/blue]伤害。",
+    "MOD503_CARD_IRON_MOUNTAIN_LEAN.title": "铁山靠",
+    "MOD503_CARD_IRON_MOUNTAIN_LEAN.description": "获得[green]{Block:diff()} + 骰子点数[/green]护甲。"
+}
