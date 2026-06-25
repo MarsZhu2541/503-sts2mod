@@ -11,7 +11,7 @@ namespace Mod503.Scripts;
 [RegisterOrb]
 public class DiceOrb : ModOrbTemplate
 {
-    public int CurrentDicePoint { get; private set; } = 1;
+    public int CurrentDicePoint { get; private set; } = 0;
     private static readonly Random _diceRng = new Random();
     // 被动效果数值，ModifyOrbValue表示是否吃集中等
      public override decimal PassiveVal => ModifyOrbValue(CurrentDicePoint);
@@ -31,7 +31,6 @@ public class DiceOrb : ModOrbTemplate
     );
      public override async Task AfterTurnStartOrbTrigger(PlayerChoiceContext choiceContext)
     {
-        await RollSingleDice(choiceContext);
     }
      public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext)
     {

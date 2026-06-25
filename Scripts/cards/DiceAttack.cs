@@ -54,7 +54,11 @@ public class DiceAttack : ModCardTemplate
         // 查找第一个 DiceOrb 类型的充能球
         var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
         
-    
+        // 掷骰子刷新
+        await diceOrb.RollSingleDice(choiceContext);
+        // 等待0.3秒，让玩家看清骰子数字变化
+        await Task.Delay(500);
+
         // 获取骰子点数，如果没有骰子球则默认为0
         int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
         
@@ -66,8 +70,6 @@ public class DiceAttack : ModCardTemplate
             .FromCard(this)
             .Targeting(cardPlay.Target!)
             .Execute(choiceContext);
-
-        await diceOrb.RollSingleDice(choiceContext); // 触发骰子球的掷骰子逻辑
     }
 
     // 升级效果

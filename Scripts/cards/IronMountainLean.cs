@@ -57,6 +57,10 @@ public class IronMountainLean : ModCardTemplate
         // 查找第一个 DiceOrb 类型的充能球
         var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
         
+            // 掷骰子刷新
+        await diceOrb.RollSingleDice(choiceContext);
+        // 等待0.3秒，让玩家看清骰子数字变化
+        await Task.Delay(500);
       
         // 获取骰子点数，如果没有骰子球则默认为0
         int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
@@ -64,8 +68,6 @@ public class IronMountainLean : ModCardTemplate
         // 计算最终护甲 = 基础护甲 + 骰子点数
         decimal finalBlock = DynamicVars.Block.BaseValue + (decimal)dicePoint;
         await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(finalBlock, ValueProp.Move), cardPlay);
-
-        await diceOrb.RollSingleDice(choiceContext); // 触发骰子球的掷骰子逻辑
     }
 
     // 升级后的效果逻辑
