@@ -1,5 +1,5 @@
 {
     "MOD503_RELIC_DICE.title": "命运骰子",
-    "MOD503_RELIC_DICE.description": "摇动骰子，获得随机点数。提供[blue]{Cards}[/blue]层运势。",
+    "MOD503_RELIC_DICE.description": "打出借势属性卡牌时，摇动骰子获得增益。\n提供[blue]{Cards}[/blue]层运势。",
     "MOD503_RELIC_DICE.flavor": "赌狗的狂欢"
 }

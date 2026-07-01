@@ -2,7 +2,10 @@
     "MOD503_POWER_LUCKY_POWER.description": "打出具有[blue]借势[/blue]属性卡牌时，骰子点数增加[blue]{Cards}[/blue]点，消耗一层能力。",
     "MOD503_POWER_LUCKY_POWER.smartDescription": "打出具有[blue]借势[/blue]属性卡牌时，骰子点数增加[blue]{Cards}[/blue]点，消耗一层能力。",
     "MOD503_POWER_LUCKY_POWER.title": "运势",
-    "MOD503_POWER_ENHANCE_LUCKY.description": "运势增加的数值+[blue]1[/blue]点。",
-    "MOD503_POWER_ENHANCE_LUCKY.smartDescription": "运势增加的数值+[blue]1[/blue]点。",
-    "MOD503_POWER_ENHANCE_LUCKY.title": "强运"
+    "MOD503_POWER_ENHANCE_LUCKY.description": "运势增加的数值+[blue]{Amount}[/blue]点。",
+    "MOD503_POWER_ENHANCE_LUCKY.smartDescription": "运势增加的数值+[blue]{Amount}[/blue]点。",
+    "MOD503_POWER_ENHANCE_LUCKY.title": "强运",
+    "MOD503_POWER_CHEAT_STATUS_POWER.description": "每回合前多次骰子点数必为6。",
+    "MOD503_POWER_CHEAT_STATUS_POWER.smartDescription": "每回合前[blue]{Cards}[/blue]次骰子点数必为6。",
+    "MOD503_POWER_CHEAT_STATUS_POWER.title": "作弊形态"
 }

@@ -6,8 +6,14 @@
     "MOD503_CARD_IRON_MOUNTAIN_LEAN.title": "铁山靠",
     "MOD503_CARD_IRON_MOUNTAIN_LEAN.description": "获得[green]{Block:diff()} + 骰子点数[/green]护甲。",
     "MOD503_CARD_GAIN_LUCK_ENHANCE.title": "运来",
-    "MOD503_CARD_GAIN_LUCK_ENHANCE.description": "获得一层[green]强运[/green]能力。",
+    "MOD503_CARD_GAIN_LUCK_ENHANCE.description": "获得[blue]{Cards}[/blue]层[green]强运[/green]能力。",
     "MOD503_CARD_GAIN_LUCK_AMOUNT.title": "保持运势",
-    "MOD503_CARD_GAIN_LUCK_AMOUNT.description": "获得[blue]{Cards}[/blue]层[green]运势[/green]和[blue]{Block:diff()}[/blue]护甲。"
+    "MOD503_CARD_GAIN_LUCK_AMOUNT.description": "获得[blue]{Cards}[/blue]层[green]运势[/green]和[blue]{Block:diff()}[/blue]护甲。",
+    "MOD503_CARD_DICE_DRAW.title": "牌来",
+    "MOD503_CARD_DICE_DRAW.description": "抽[blue]{Cards}[/blue]张牌。\n若点数>3，则额外抽1张牌。",
+    "MOD503_CARD_DICE_ENERGY.title": "幸运补给",
+    "MOD503_CARD_DICE_ENERGY.description": "获得[blue]{Energy}[/blue]点能量。\n若点数>3，则额外获得1点能量。",
+    "MOD503_CARD_CHEAT_STATUS.title": "出千形态",
+    "MOD503_CARD_CHEAT_STATUS.description": "获得出千形态能力"
 
 }

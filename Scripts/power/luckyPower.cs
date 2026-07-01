@@ -22,7 +22,7 @@ namespace Mod503.Scripts;
 public class LuckyPower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
-    public int LuckyBonus { get; set; } = 0;
+    public int LuckyBonus { get; set; } = 1;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(LuckyBonus)];
     public override PowerStackType StackType => PowerStackType.Counter;
 
@@ -48,9 +48,6 @@ public class LuckyPower : ModPowerTemplate
     internal void setLuckyBonus(int v)
     {
         LuckyBonus = v;
-        Player player = Owner.Player;
-        var orbs = player.PlayerCombatState.OrbQueue.Orbs;
-        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
-        diceOrb.LuckyBonus = LuckyBonus;
+        Flash();
     }
 }

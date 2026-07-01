@@ -11,7 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace Mod503.Scripts;
 
 [RegisterCard(typeof(DicerCardPool))]
-[RegisterCharacterStarterCard(typeof(Dicer), 1)]
+// [RegisterCharacterStarterCard(typeof(Dicer), 1)]
 public class CheatAttack : ModCardTemplate
 {
     // 基础耗能
@@ -19,7 +19,7 @@ public class CheatAttack : ModCardTemplate
     // 卡牌类型
     private const CardType type = CardType.Attack;
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Common;
+    private const CardRarity rarity = CardRarity.Rare;
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AnyEnemy;
     // 是否在卡牌图鉴中显示

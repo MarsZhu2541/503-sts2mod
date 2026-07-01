@@ -30,15 +30,15 @@ public class IronMountainLean : ModCardTemplate
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Mod503/images/cards/IronMountainLean.png"
-        // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
-        // 如果使用自定义卡池，需要改下material，看添加人物章节的添加卡池部分
-        // FramePath: "", // 卡牌背景
-        // PortraitBorderPath: "", // 边框（状态牌感染使用的）
-        // BannerTexturePath: "" // 横幅（不同类型）
+    // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
+    // 如果使用自定义卡池，需要改下material，看添加人物章节的添加卡池部分
+    // FramePath: "", // 卡牌背景
+    // PortraitBorderPath: "", // 边框（状态牌感染使用的）
+    // BannerTexturePath: "" // 横幅（不同类型）
     );
-    
 
-   protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
+
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -52,24 +52,18 @@ public class IronMountainLean : ModCardTemplate
     // 打出时的效果逻辑
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        Player player = cardPlay.Card.Owner;
-        var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
-         int dicePoint = 0;
-        if (luckyPower.FirstOrDefault()?.Amount > 0)
-        {
-            // 获取玩家当前拥有的所有充能球
-            var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
 
-            // 查找第一个 DiceOrb 类型的充能球
-            var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
+        // 获取玩家当前拥有的所有充能球
+        var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
 
-            // 掷骰子刷新
-            await diceOrb.RollSingleDice(choiceContext);
-           // 获取骰子点数，如果没有骰子球则默认为0
-            dicePoint = diceOrb?.CurrentDicePoint ?? 0;
-   
-        }
-        
+        // 查找第一个 DiceOrb 类型的充能球
+        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
+
+        // 掷骰子刷新
+        await diceOrb.RollSingleDice(choiceContext);
+        // 获取骰子点数，如果没有骰子球则默认为0
+        int dicePoint = diceOrb?.CurrentDicePoint ?? 0;
+
         // 计算最终护甲 = 基础护甲 + 骰子点数
         decimal finalBlock = DynamicVars.Block.BaseValue + (decimal)dicePoint;
         await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(finalBlock, ValueProp.Move), cardPlay);
@@ -81,7 +75,7 @@ public class IronMountainLean : ModCardTemplate
         DynamicVars.Block.UpgradeValueBy(3m);
     }
 
-     public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        DicerKeywords.Luckier
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+       DicerKeywords.Luckier
+   ];
 }

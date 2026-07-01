@@ -48,26 +48,21 @@ public class DiceAttack : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 
-        Player player = cardPlay.Card.Owner;
-        var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
-        var finalDamage = DynamicVars.Damage.BaseValue;
-        if (luckyPower.FirstOrDefault()?.Amount > 0)
-        {
-            // 获取玩家当前拥有的所有充能球
+        // 获取玩家当前拥有的所有充能球
 
-            var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
+        var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
 
-            // 查找第一个 DiceOrb 类型的充能球
-            var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
+        // 查找第一个 DiceOrb 类型的充能球
+        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
 
-            // 掷骰子刷新
-            await diceOrb.RollSingleDice(choiceContext);
+        // 掷骰子刷新
+        await diceOrb.RollSingleDice(choiceContext);
 
-            // 获取骰子点数，如果没有骰子球则默认为0
-            int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
-            // 计算最终伤害 = 基础伤害 + 骰子点数
-            finalDamage = DynamicVars.Damage.BaseValue + dicePoint;
-        }
+        // 获取骰子点数，如果没有骰子球则默认为0
+        int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
+        // 计算最终伤害 = 基础伤害 + 骰子点数
+        var finalDamage = DynamicVars.Damage.BaseValue + dicePoint;
+
 
         // 执行攻击
         await DamageCmd.Attack(finalDamage)

@@ -1,15 +1,13 @@
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.RelicPools;
-using MegaCrit.Sts2.Core.Saves.Runs;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using Mod503.Characters;
+using MegaCrit.Sts2.Core.HoverTips;
 
 namespace Mod503.Scripts;
 
@@ -28,6 +26,12 @@ public class Dice : ModRelicTemplate
         IconOutlinePath: $"res://Mod503/images/relics/{GetType().Name}.png",
         BigIconPath: $"res://Mod503/images/relics/{GetType().Name}.png"
     );
+
+        protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+    [
+        HoverTipFactory.FromKeyword(DicerKeywords.Luckier),
+    ];
+
 
     // 每次战斗开始时重置
     public override async Task BeforeCombatStart()
