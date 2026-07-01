@@ -1,18 +1,13 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 using Mod503.Characters;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Mod503.Scripts;
 
@@ -41,6 +36,10 @@ public class DiceAttack : ModCardTemplate
         new DamageVar(3, ValueProp.Move)
     ];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        DicerKeywords.Luckier
+    ];
+
     public DiceAttack() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
@@ -48,23 +47,28 @@ public class DiceAttack : ModCardTemplate
     // 打出时的效果逻辑
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取玩家当前拥有的所有充能球
-        var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
-        
-        // 查找第一个 DiceOrb 类型的充能球
-        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
-        
-        // 掷骰子刷新
-        await diceOrb.RollSingleDice(choiceContext);
-        // 等待0.3秒，让玩家看清骰子数字变化
-        await Task.Delay(500);
 
-        // 获取骰子点数，如果没有骰子球则默认为0
-        int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
-        
-        // 计算最终伤害 = 基础伤害 + 骰子点数
-        var finalDamage = DynamicVars.Damage.BaseValue + dicePoint;
-        
+        Player player = cardPlay.Card.Owner;
+        var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
+        var finalDamage = DynamicVars.Damage.BaseValue;
+        if (luckyPower.FirstOrDefault()?.Amount > 0)
+        {
+            // 获取玩家当前拥有的所有充能球
+
+            var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
+
+            // 查找第一个 DiceOrb 类型的充能球
+            var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
+
+            // 掷骰子刷新
+            await diceOrb.RollSingleDice(choiceContext);
+
+            // 获取骰子点数，如果没有骰子球则默认为0
+            int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
+            // 计算最终伤害 = 基础伤害 + 骰子点数
+            finalDamage = DynamicVars.Damage.BaseValue + dicePoint;
+        }
+
         // 执行攻击
         await DamageCmd.Attack(finalDamage)
             .FromCard(this)

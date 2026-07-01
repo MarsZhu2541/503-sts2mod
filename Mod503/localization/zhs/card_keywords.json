@@ -1,0 +1,9 @@
+{
+    "MOD503_KEYWORD_LUCKIER.description": "有运势能力层数时，发动运势效果。",
+    "MOD503_KEYWORD_LUCKIER.title": "借势",
+    "MOD503_KEYWORD_LUCKY_POWER.description": "打出具有[blue]借势[/blue]属性卡牌时，骰子点数增加, 消耗一层能力。",
+    "MOD503_KEYWORD_LUCKY_POWER.title": "运势",
+    "MOD503_KEYWORD_ENHANCE_LUCKY.description": "运势增加的数值+[blue]1[/blue]点。",
+    "MOD503_KEYWORD_ENHANCE_LUCKY.title": "强运"   
+
+}

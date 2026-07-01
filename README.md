@@ -16,3 +16,7 @@
     "DEMO_CARD_TEST_CARD.title": "笑里藏刀",
     "DEMO_CARD_TEST_CARD.description": "造成{Damage:diff()}点伤害。"
     ```
+
+
+# TODO
+更多卡牌

@@ -5,12 +5,15 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Scaffolding.Godot;
+using STS2RitsuLib.Ui.Toast;
 
 namespace Mod503.Scripts;
 
 [RegisterOrb]
 public class DiceOrb : ModOrbTemplate
 {
+    
+    public int LuckyBonus { get; set; } = 0;
     public int CurrentDicePoint { get; private set; } = 0;
     private static readonly Random _diceRng = new Random();
     // 被动效果数值，ModifyOrbValue表示是否吃集中等
@@ -34,7 +37,17 @@ public class DiceOrb : ModOrbTemplate
     }
      public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext)
     {
-        CurrentDicePoint = _diceRng.Next(1, 7);
+        int random = _diceRng.Next(1, 7);
+        CurrentDicePoint = random + LuckyBonus;
+        //text effect
+        if (LuckyBonus > 0)
+        {
+            DiceTextVfx.ShowInfo(Owner.Creature, $"{random} + {LuckyBonus} = {CurrentDicePoint}");
+        }
+        else
+        {
+            DiceTextVfx.ShowInfo(Owner.Creature, $"{random}");
+        }
         return CurrentDicePoint;
     }
 

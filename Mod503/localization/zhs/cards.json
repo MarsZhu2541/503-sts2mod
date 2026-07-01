@@ -4,5 +4,10 @@
     "MOD503_CARD_DICE_ATTACK.title": "骰子攻击",
     "MOD503_CARD_DICE_ATTACK.description": "造成[blue]{Damage:diff()} + 骰子点数[/blue]伤害。",
     "MOD503_CARD_IRON_MOUNTAIN_LEAN.title": "铁山靠",
-    "MOD503_CARD_IRON_MOUNTAIN_LEAN.description": "获得[green]{Block:diff()} + 骰子点数[/green]护甲。"
+    "MOD503_CARD_IRON_MOUNTAIN_LEAN.description": "获得[green]{Block:diff()} + 骰子点数[/green]护甲。",
+    "MOD503_CARD_GAIN_LUCK_ENHANCE.title": "运来",
+    "MOD503_CARD_GAIN_LUCK_ENHANCE.description": "获得一层[green]强运[/green]能力。",
+    "MOD503_CARD_GAIN_LUCK_AMOUNT.title": "保持运势",
+    "MOD503_CARD_GAIN_LUCK_AMOUNT.description": "获得[blue]{Cards}[/blue]层[green]运势[/green]和[blue]{Block:diff()}[/blue]护甲。"
+
 }

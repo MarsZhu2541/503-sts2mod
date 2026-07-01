@@ -21,7 +21,7 @@ public class Dice : ModRelicTemplate
     
     public override RelicRarity Rarity => RelicRarity.Starter;
     
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
     public override RelicAssetProfile AssetProfile => new(
         IconPath: $"res://Mod503/images/relics/{GetType().Name}.png",
@@ -52,5 +52,6 @@ public class Dice : ModRelicTemplate
         
         // 添加 DiceOrb 充能球
         await OrbCmd.Channel<DiceOrb>(choiceContext, Owner);
+        await PowerCmd.Apply<LuckyPower>(choiceContext, player.Creature, 3, player.Creature, null);
     }
 }

@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Godot;
+using STS2RitsuLib.Scaffolding.Visuals;
 
 namespace Mod503.Characters;
 
@@ -12,8 +13,8 @@ public sealed class Dicer : ModCharacterTemplate<DicerCardPool, DicerRelicPool, 
 {
     public static readonly Color ThemeColor = new(0.42f, 0.65f, 0.72f);
 
-    private const string SceneRoot = $"res://Mod503/scenes/characters";
-    private const string ImageRoot = $"res://Mod503/images/characters";
+    private const string SceneRoot = $"res://Mod503/scenes/characters/zsj";
+    private const string ImageRoot = $"res://Mod503/images/characters/zsj";
     private const string CharacterScenePath = $"{SceneRoot}/Dicer_character.tscn";
     private const string EnergyCounterScenePath = $"{SceneRoot}/Dicer_energy_counter.tscn";
     private const string MerchantScenePath = $"{SceneRoot}/Dicer_merchant.tscn";
@@ -48,17 +49,41 @@ public sealed class Dicer : ModCharacterTemplate<DicerCardPool, DicerRelicPool, 
             RestSiteAnimPath: RestSiteScenePath),
         Ui: new CharacterUiAssetSet(
             // 人物头像路径。
-            IconTexturePath: $"{ImageRoot}/Dicer_character_icon.png",
+            IconTexturePath: $"{ImageRoot}/zsj_icon.png",
+            IconPath: $"{SceneRoot}/zsj_icon.tscn",
             // 人物头像轮廓。
-            IconOutlineTexturePath: $"{ImageRoot}/Dicer_character_icon_outline.png",
+            IconOutlineTexturePath: $"{ImageRoot}/zsj_icon.png",
             // 人物选择背景。
             CharacterSelectBgPath: CharacterSelectBgScenePath,
             // 人物选择图标。
-            CharacterSelectIconPath: $"{ImageRoot}/Dicer_character_select.png",
+            CharacterSelectIconPath: $"{ImageRoot}/zsj_idle.png",
             // 人物选择图标-锁定状态。
-            CharacterSelectLockedIconPath: $"{ImageRoot}/Dicer_character_select_locked.png",
+            CharacterSelectLockedIconPath: $"{ImageRoot}/zsj_icon.png",
             // 地图上的角色标记图标、表情轮盘上的角色头像。
-            MapMarkerPath: $"{ImageRoot}/Dicer_map_marker.png"));
+            MapMarkerPath: $"res://Mod503/images/characters/Dicer_map_marker.png"),
+            VisualCues: ModVisualCues.CueSet()
+            // idle动画使用单图
+            .Single("idle", $"{ImageRoot}/zsj_idle.png")
+            // attack动画使用帧动画
+            .Sequence("hit", seq => seq
+                .Frame($"{ImageRoot}/zsj_hit.png", 0.30f)
+                .Frame($"{ImageRoot}/zsj_idle.png", 0.06f))
+            .Sequence("attack", seq => seq
+                .Frame($"{ImageRoot}/zsj_attack1.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack2.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack3.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack4.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack5.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack4.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack3.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack2.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_attack1.png", 0.10f)
+                .Frame($"{ImageRoot}/zsj_idle.png", 0.06f))
+            .Single("dead", $"{ImageRoot}/zsj_dead.png")
+            .Build() // 最后需要调用一次build
+            
+            );
+
 
     // 某个字段没写时，RitsuLib 会从占位角色配置里补齐。
     public override string? PlaceholderCharacterId => "ironclad";
