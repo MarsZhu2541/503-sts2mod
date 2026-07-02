@@ -38,7 +38,7 @@ public class GainLuckAmount : ModCardTemplate
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(8m, ValueProp.Move),
+        new BlockVar(6m, ValueProp.Move),
         new CardsVar(addedAmount)
     ];
 

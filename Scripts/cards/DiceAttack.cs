@@ -12,7 +12,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace Mod503.Scripts;
 
 [RegisterCard(typeof(DicerCardPool))]
-[RegisterCharacterStarterCard(typeof(Dicer), 3)]
+[RegisterCharacterStarterCard(typeof(Dicer), 4)]
 public class DiceAttack : ModCardTemplate
 {
     // 基础耗能
@@ -20,8 +20,8 @@ public class DiceAttack : ModCardTemplate
     // 卡牌类型
     private const CardType type = CardType.Attack;
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Common;
-    // 目标类型（AnyEnemy表示任意敌人）
+    private const CardRarity rarity = CardRarity.Basic;
+    // 目标类型（AnyEnemy表示任意敌人）ic
     private const TargetType targetType = TargetType.AnyEnemy;
     // 是否在卡牌图鉴中显示
     private const bool shouldShowInCardLibrary = true;

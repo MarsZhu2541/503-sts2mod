@@ -15,7 +15,7 @@ public class DiceDraw : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
-    private int drawCount = 1;
+    private int drawCount = 2;
     // 卡牌类型
     private const CardType type = CardType.Skill;
     // 卡牌稀有度
@@ -61,7 +61,7 @@ public class DiceDraw : ModCardTemplate
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(2);
     }
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
