@@ -6,7 +6,7 @@
     "MOD503_KEYWORD_ENHANCE_LUCKY.description": "运势增加的数值+[blue]1[/blue]点。",
     "MOD503_KEYWORD_ENHANCE_LUCKY.title": "强运",
     "MOD503_KEYWORD_CHEAT_STATUS_POWER.description": "每回合前[blue]2[/blue]次骰子点数必为6。",
-    "MOD503_KEYWORD_CHEAT_STATUS_POWER.title": "作弊形态"
-
-
+    "MOD503_KEYWORD_CHEAT_STATUS_POWER.title": "作弊形态",
+    "MOD503_KEYWORD_PRICE_POOL.description": "每当骰子点数为6及以上时，获得一点奖池。",
+    "MOD503_KEYWORD_PRICE_POOL.title": "奖池"
 }
