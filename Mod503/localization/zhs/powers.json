@@ -7,5 +7,8 @@
     "MOD503_POWER_ENHANCE_LUCKY.title": "强运",
     "MOD503_POWER_CHEAT_STATUS_POWER.description": "每回合前多次骰子点数必为6。",
     "MOD503_POWER_CHEAT_STATUS_POWER.smartDescription": "每回合前[blue]{Cards}[/blue]次骰子点数必为6。",
-    "MOD503_POWER_CHEAT_STATUS_POWER.title": "作弊形态"
+    "MOD503_POWER_CHEAT_STATUS_POWER.title": "出千形态",
+    "MOD503_POWER_PRICE_POOL.description": "骰子点数为6及以上时，奖池加一。",
+    "MOD503_POWER_PRICE_POOL.smartDescription": "骰子点数为6及以上时，奖池加一。",
+    "MOD503_POWER_PRICE_POOL.title": "奖池"
 }

@@ -16,7 +16,7 @@ public class GainPricePool : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
-    private int account = 1;
+    private int count = 1;
     // 卡牌类型
     private const CardType type = CardType.Power;
     // 卡牌稀有度
@@ -28,13 +28,13 @@ public class GainPricePool : ModCardTemplate
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Mod503/images/cards/PricePool.png"
+        PortraitPath: $"res://Mod503/images/cards/GainPricePool.png"
     );
     
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new CardsVar(addedAmount)
+        new CardsVar(count)
     ];
 
     public GainPricePool() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)

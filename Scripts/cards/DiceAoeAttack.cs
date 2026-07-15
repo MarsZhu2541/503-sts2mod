@@ -15,7 +15,7 @@ namespace Mod503.Scripts;
 public class DiceAoeAttack : ModCardTemplate
 {
     // 基础耗能
-    private const int energyCost = ;
+    private const int energyCost = 2;
     // 卡牌类型
     private const CardType type = CardType.Attack;
     // 卡牌稀有度
@@ -39,7 +39,7 @@ public class DiceAoeAttack : ModCardTemplate
         DicerKeywords.Luckier
     ];
 
-    public DiceAttack() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
+    public DiceAoeAttack() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
 

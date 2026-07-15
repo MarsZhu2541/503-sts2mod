@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using Mod503.Characters;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -28,13 +29,13 @@ public class Suppress : ModCardTemplate
         PortraitPath: $"res://Mod503/images/cards/{GetType().Name}.png"
     );
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        DicerKeywords.Luckier
-    ];
-
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(count)
+    ];
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
+        DicerKeywords.Luckier
     ];
 
     public Suppress() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
@@ -47,20 +48,22 @@ public class Suppress : ModCardTemplate
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            await PowerCmd.Apply<PiercingWailPower>(
-            cardPlay.Target,
-            count,
-            base.Owner.Creature,
-            this
+            await PowerCmd.Apply<TemporaryStrengthPower>(
+                choiceContext,
+                cardPlay.Target,
+                count * -2,
+                base.Owner.Creature,
+                this
             );
         }
         else
         {
-            await PowerCmd.Apply<PiercingWailPower>(
-            cardPlay.Target,
-            count*2,
-            base.Owner.Creature,
-            this
+            await PowerCmd.Apply<TemporaryStrengthPower>(
+                choiceContext,
+                cardPlay.Target,
+                count * -1,
+                base.Owner.Creature,
+                this
             );
         }
     }

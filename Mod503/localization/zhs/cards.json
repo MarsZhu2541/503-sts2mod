@@ -17,12 +17,14 @@
     "MOD503_CARD_CHEAT_STATUS.description": "获得出千形态能力",
     "MOD503_CARD_DICE_AOE_ATTACK.title": "摇滚冲击",
     "MOD503_CARD_DICE_AOE_ATTACK.description": "对所有敌人造成[blue]{Damage:diff()} + 骰子点数[/blue]伤害。",
-    "MOD503_CARD_DICE_MULTI_ATTACK.title": "连锁骰击",
+    "MOD503_CARD_DICE_MULTI_ATTACK.title": "连环骰击",
     "MOD503_CARD_DICE_MULTI_ATTACK.description": "对目标敌人造成[blue]{Damage:diff()}[/blue]伤害2次。\n若点数为6及以上时次数翻倍。",
     "MOD503_CARD_HYPNOSES.title": "催眠",
     "MOD503_CARD_HYPNOSES.description": "给予[blue]{Cards}[/blue]层虚弱和易伤。\n若点数为6及以上时翻倍。",
     "MOD503_CARD_SUPPRESS.title": "压制",
-    "MOD503_CARD_SUPPRESS.description": "降低目标[blue]{Cards}[/blue]点力量。\n若点数为6及以上时翻倍。",
+    "MOD503_CARD_SUPPRESS.description": "回合内降低目标[blue]{Cards}[/blue]点力量。\n若点数为6及以上时翻倍。",
     "MOD503_CARD_GAIN_PRICE_POOL.title": "奖池",
-    "MOD503_CARD_GAIN_PRICE_POOL.description": "获得[blue]{Cards}[/blue]点奖池。"
+    "MOD503_CARD_GAIN_PRICE_POOL.description": "获得[blue]{Cards}[/blue]点奖池。",
+    "MOD503_CARD_EXPLOSIVE.title": "爆运",
+    "MOD503_CARD_EXPLOSIVE.description": "造成奖池层数伤害。若奖池层数大于10，则伤害翻倍。若奖池层数大于20，则伤害翻3倍。清空奖池"
 }

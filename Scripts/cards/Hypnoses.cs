@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using Mod503.Characters;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -10,7 +11,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace Mod503.Scripts;
 
 [RegisterCard(typeof(DicerCardPool))]
-public class Hypnosis : ModCardTemplate
+public class Hypnoses : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
@@ -39,7 +40,7 @@ public class Hypnosis : ModCardTemplate
         new CardsVar(count)
     ];
 
-    public Hypnosis() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
+    public Hypnoses() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
 
@@ -49,13 +50,13 @@ public class Hypnosis : ModCardTemplate
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            await PowerCmd.Apply<WeakPower>(target, DynamicVars.Cards.IntValue*2, monster.Creature, null);
-            await PowerCmd.Apply<VulnerablePower>(target, DynamicVars.Cards.IntValue*2, monster.Creature, null);
+            await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
         }
         else
         {
-           await PowerCmd.Apply<WeakPower>(target, DynamicVars.Cards.IntValue, monster.Creature, null);
-           await PowerCmd.Apply<VulnerablePower>(target, DynamicVars.Cards.IntValue*2, monster.Creature, null);
+           await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
+           await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
         }
     }
 

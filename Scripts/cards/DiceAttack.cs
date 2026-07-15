@@ -39,7 +39,6 @@ public class DiceAttack : ModCardTemplate
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
         DicerKeywords.Luckier
     ];
-
     public DiceAttack() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }

@@ -25,24 +25,30 @@ public class PricePool : ModPowerTemplate
     );
 
     // 悬浮提示展示Luckier关键词（仅UI）
-     protected override IEnumerable<string> RegisteredKeywordIds => ["MOD503_KEYWORD_PRICE_POOL"];
+    protected override IEnumerable<string> RegisteredKeywordIds => ["MOD503_KEYWORD_PRICE_POOL"];
 
-        
+
     public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-         if (Amount <= 0
-           || cardPlay.Card.Owner != Owner.Player
-           || cardPlay.Card.Type == CardType.Power
-           || !cardPlay.Card.Keywords.Contains(DicerKeywords.Luckier)
-           || CombatManager.Instance.IsOverOrEnding)
+        if (Amount <= 0
+          || cardPlay.Card.Owner != Owner.Player
+          || cardPlay.Card.Type == CardType.Power
+          || !cardPlay.Card.Keywords.Contains(DicerKeywords.Luckier)
+          || CombatManager.Instance.IsOverOrEnding)
         {
             return;
         }
-        var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
+        if(cardPlay.Card is Explosive)
+        {
+            await PowerCmd.Remove(this);
+            return;
+        }
+        
+        var rollPoint = await DiceOrb.getRollPoint(ctx, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            Amount++;
+            await PowerCmd.Apply<PricePool>(ctx, cardPlay.Card.Owner.Creature, 1, cardPlay.Card.Owner.Creature, null);
         }
-    }
+    }  
 
 }
