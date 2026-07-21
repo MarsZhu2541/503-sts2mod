@@ -10,9 +10,9 @@
     "MOD503_CARD_GAIN_LUCK_AMOUNT.title": "保持运势",
     "MOD503_CARD_GAIN_LUCK_AMOUNT.description": "获得[blue]{Cards}[/blue]层[green]运势[/green]和[blue]{Block:diff()}[/blue]护甲。",
     "MOD503_CARD_DICE_DRAW.title": "牌来",
-    "MOD503_CARD_DICE_DRAW.description": "抽[blue]{Cards}[/blue]张牌。\n若点数>3，则额外抽1张牌。",
+    "MOD503_CARD_DICE_DRAW.description": "抽[blue]{Cards}[/blue]张牌。\n若点数>5，则额外抽1张牌。",
     "MOD503_CARD_DICE_ENERGY.title": "幸运补给",
-    "MOD503_CARD_DICE_ENERGY.description": "获得[blue]{Energy}[/blue]点能量。\n若点数>3，则额外获得1点能量。",
+    "MOD503_CARD_DICE_ENERGY.description": "获得[blue]{Energy}[/blue]点能量。\n若点数>5，则额外获得1点能量。",
     "MOD503_CARD_CHEAT_STATUS.title": "出千形态",
     "MOD503_CARD_CHEAT_STATUS.description": "获得出千形态能力",
     "MOD503_CARD_DICE_AOE_ATTACK.title": "摇滚冲击",
@@ -26,5 +26,11 @@
     "MOD503_CARD_GAIN_PRICE_POOL.title": "奖池",
     "MOD503_CARD_GAIN_PRICE_POOL.description": "获得[blue]{Cards}[/blue]点奖池。",
     "MOD503_CARD_EXPLOSIVE.title": "爆运",
-    "MOD503_CARD_EXPLOSIVE.description": "造成奖池层数伤害。若奖池层数大于10，则伤害翻倍。若奖池层数大于20，则伤害翻3倍。清空奖池"
+    "MOD503_CARD_EXPLOSIVE.description": "造成奖池层数伤害。\n层数大于10时则伤害翻倍。\n层数大于20时伤害翻3倍。\n清空奖池",
+    "MOD503_CARD_DICE_STRENGTH.title": "兴奋剂",
+    "MOD503_CARD_DICE_STRENGTH.description": "点数>1时获得[blue]{Cards}[/blue]点力量。\n点数>5时翻倍。\n点数=1时无事发生。",
+    "MOD503_CARD_DICE_DEXTERITY.title": "残影",
+    "MOD503_CARD_DICE_DEXTERITY.description": "点数>1时获得[blue]{Cards}[/blue]点敏捷。\n点数>5时翻倍。\n点数=1时无事发生。",
+    "MOD503_CARD_DEATH_GAMBLE.title": "我和你赌命",
+    "MOD503_CARD_DEATH_GAMBLE.description": "点数=1时造成自身[blue]{Cards}%[/blue]最大生命值伤害。\n点数>5时造成目标[blue]{Cards}%[/blue]最大生命值伤害。\n其他点数无事发生。"
 }

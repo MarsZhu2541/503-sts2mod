@@ -24,7 +24,6 @@ public class DiceDraw : ModCardTemplate
     private const TargetType targetType = TargetType.Self;
     // 是否在卡牌图鉴中显示
     private const bool shouldShowInCardLibrary = true;
-    public override bool GainsBlock => true;
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
@@ -48,7 +47,7 @@ public class DiceDraw : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
-        if (rollPoint > 3)
+        if (rollPoint > 5)
         {
             await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue + 1, cardPlay.Card.Owner);
         }

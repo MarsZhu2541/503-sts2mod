@@ -1,10 +1,9 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models.Powers;
 using Mod503.Characters;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -12,37 +11,36 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace Mod503.Scripts;
 
 [RegisterCard(typeof(DicerCardPool))]
-// [RegisterCharacterStarterCard(typeof(Dicer), 1)]
-public class DiceEnergy : ModCardTemplate
+public class DiceDexterity : ModCardTemplate
 {
     // 基础耗能
-    private const int energyCost = 0;
-    private int energyCount = 1;
+    private const int energyCost = 1;
+    private int count = 1;
     // 卡牌类型
-    private const CardType type = CardType.Skill;
+   private const CardType type = CardType.Skill;
     // 卡牌稀有度
     private const CardRarity rarity = CardRarity.Common;
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.Self;
     // 是否在卡牌图鉴中显示
     private const bool shouldShowInCardLibrary = true;
-    public override bool GainsBlock => true;
+
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Mod503/images/cards/DiceEnergy.png"
+        PortraitPath: $"res://Mod503/images/cards/DiceDexterity.png"
     );
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
-        DicerKeywords.Luckier
+        DicerKeywords.Luckier, CardKeyword.Exhaust
     ];
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new EnergyVar(energyCount)
+        new CardsVar(count)
     ];
 
-    public DiceEnergy() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
+    public DiceDexterity() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {
     }
 
@@ -52,22 +50,34 @@ public class DiceEnergy : ModCardTemplate
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue + 1, cardPlay.Card.Owner);
+            await PowerCmd.Apply<DexterityPower>(
+                choiceContext,
+                cardPlay.Target,
+                count * 2,
+                base.Owner.Creature,
+                this
+            );
         }
-        else
+        else if(rollPoint > 1)
         {
-            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, cardPlay.Card.Owner);
+            await PowerCmd.Apply<DexterityPower>(
+                choiceContext,
+                cardPlay.Target,
+                count,
+                base.Owner.Creature,
+                this
+            );
         }
     }
 
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(2);
     }
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
     [
-        HoverTipFactory.FromKeyword(DicerKeywords.LuckyPower),
+         HoverTipFactory.FromKeyword(DicerKeywords.LuckyPower),
     ];
 }
