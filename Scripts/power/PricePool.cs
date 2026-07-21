@@ -30,6 +30,13 @@ public class PricePool : ModPowerTemplate
 
     public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
+
+        if(cardPlay.Card is Explosive)
+        {
+            await PowerCmd.Remove(this);
+            return;
+        }
+
         if (Amount <= 0
           || cardPlay.Card.Owner != Owner.Player
           || cardPlay.Card.Type == CardType.Power
@@ -38,11 +45,7 @@ public class PricePool : ModPowerTemplate
         {
             return;
         }
-        if(cardPlay.Card is Explosive)
-        {
-            await PowerCmd.Remove(this);
-            return;
-        }
+    
         
         var rollPoint = await DiceOrb.getRollPoint(ctx, cardPlay.Card.Owner);
         if (rollPoint > 5)

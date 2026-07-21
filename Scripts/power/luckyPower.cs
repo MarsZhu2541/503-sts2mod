@@ -31,7 +31,7 @@ public class LuckyPower : ModPowerTemplate
         BigIconPath: "res://Mod503/images/powers/lucky_power_256.png"
     );
     protected override IEnumerable<string> RegisteredKeywordIds => ["MOD503_KEYWORD_LUCKIER"];
-        public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         if (Amount <= 0
            || cardPlay.Card.Owner != Owner.Player
@@ -45,9 +45,10 @@ public class LuckyPower : ModPowerTemplate
     }
 
 
-    internal void setLuckyBonus(int v)
+    internal async Task setLuckyBonusAsync(int v)
     {
         LuckyBonus = v;
+        await Cmd.CustomScaledWait(0.2f, 0.4f);
         Flash();
     }
 }

@@ -48,7 +48,8 @@ public class Suppress : ModCardTemplate
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            await PowerCmd.Apply<TemporaryStrengthPower>(
+            // 如果掷骰点数大于5，失去临时力量
+            await PowerCmd.Apply<FlexPotionPower>(
                 choiceContext,
                 cardPlay.Target,
                 count * -2,
@@ -58,7 +59,7 @@ public class Suppress : ModCardTemplate
         }
         else
         {
-            await PowerCmd.Apply<TemporaryStrengthPower>(
+            await PowerCmd.Apply<FlexPotionPower>(
                 choiceContext,
                 cardPlay.Target,
                 count * -1,

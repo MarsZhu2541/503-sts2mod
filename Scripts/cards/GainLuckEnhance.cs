@@ -62,7 +62,7 @@ public class GainLuckEnhance : ModCardTemplate
         int currentAmount = enhanceLuckyPower.FirstOrDefault()?.Amount ?? 0;
 
         var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
-        luckyPower.FirstOrDefault()?.setLuckyBonus(1 + currentAmount);
+        luckyPower.FirstOrDefault()?.setLuckyBonusAsync(1 + currentAmount);
     }
 
     // 升级后的效果逻辑
