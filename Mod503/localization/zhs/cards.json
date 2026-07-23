@@ -24,7 +24,7 @@
     "MOD503_CARD_SUPPRESS.title": "压制",
     "MOD503_CARD_SUPPRESS.description": "回合内降低目标[blue]{Cards}[/blue]点力量。\n若点数为6及以上时翻倍。",
     "MOD503_CARD_GAIN_PRICE_POOL.title": "奖池",
-    "MOD503_CARD_GAIN_PRICE_POOL.description": "获得[blue]{Cards}[/blue]点奖池。",
+    "MOD503_CARD_GAIN_PRICE_POOL.description": "获得[blue]{Cards}[/blue]点奖池。\n每当点数为6及以上时获得1点奖池。",
     "MOD503_CARD_EXPLOSIVE.title": "爆运",
     "MOD503_CARD_EXPLOSIVE.description": "造成奖池层数伤害。\n层数大于10时则伤害翻倍。\n层数大于20时伤害翻3倍。\n奖池回到1。",
     "MOD503_CARD_DICE_STRENGTH.title": "兴奋剂",

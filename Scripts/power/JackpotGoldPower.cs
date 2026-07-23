@@ -48,9 +48,10 @@ public class JackpotGoldPower : ModPowerTemplate
 
     public override async Task AfterCombatVictory(CombatRoom room)
     {
+        var player = Owner.Player!;
         var maxReached = Math.Max(
             _maxPricePoolSeen,
-            Owner.Creature.GetPower<PricePool>()?.MaxReached ?? 0);
+            player.Creature.GetPower<PricePool>()?.MaxReached ?? 0);
         if (maxReached < Threshold)
         {
             return;
