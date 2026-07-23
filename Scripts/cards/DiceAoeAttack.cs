@@ -55,7 +55,7 @@ public class DiceAoeAttack : ModCardTemplate
         var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
 
         // 掷骰子刷新
-        await diceOrb.RollSingleDice(choiceContext);
+        await diceOrb.RollSingleDice(choiceContext, cardPlay.Card.Owner);
 
         // 获取骰子点数，如果没有骰子球则默认为0
         int dicePoint = diceOrb?.CurrentDicePoint ?? 1;

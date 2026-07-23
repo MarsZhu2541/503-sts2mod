@@ -10,7 +10,7 @@ namespace Mod503.Scripts;
 public abstract class DiceChoiceToken : ModCardTemplate
 {
     protected DiceChoiceToken()
-        : base(0, CardType.Status, CardRarity.Token, TargetType.Self, shouldShowInCardLibrary: false)
+        : base(0, CardType.Status, CardRarity.Token, TargetType.Self,  false)
     {
     }
 

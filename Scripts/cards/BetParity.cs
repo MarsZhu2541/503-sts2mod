@@ -45,6 +45,8 @@ public class BetParity : ModCardTemplate
         DiceTextVfx.ShowInfo(
             owner.Creature,
             diceOrb.PendingBet == PendingDiceBet.Odd ? "赌奇数!" : "赌偶数!");
+        
+        await diceOrb.rollAndBet(choiceContext, owner);
     }
 
     protected override void OnUpgrade()

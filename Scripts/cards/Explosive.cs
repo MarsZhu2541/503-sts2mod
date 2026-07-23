@@ -49,13 +49,13 @@ public class Explosive : ModCardTemplate
         int strengthAmount = cardPlay.Card.Owner.Creature.GetPower<PricePool>()?.Amount ?? 0;
 
         finalDamage = strengthAmount;
-        if(strengthAmount > 10)
+        if(strengthAmount > 20)
         {
-            finalDamage = strengthAmount * 2;
+            finalDamage = strengthAmount * 3;
         }
-        else if(strengthAmount > 20)
+        else if(strengthAmount > 10)
         {
-            finalDamage = strengthAmount* 3;
+            finalDamage = strengthAmount* 2;
         }
          await DamageCmd.Attack(finalDamage)
             .FromCard(this)

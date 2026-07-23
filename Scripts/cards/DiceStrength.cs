@@ -52,28 +52,30 @@ public class DiceStrength : ModCardTemplate
         {
             await PowerCmd.Apply<StrengthPower>(
                 choiceContext,
-                cardPlay.Target,
-                count * 2,
+                cardPlay.Card.Owner.Creature,
+                 DynamicVars.Cards.BaseValue * 2,
                 base.Owner.Creature,
                 this
             );
+            return;
         }
         else if(rollPoint > 1)
         {
             await PowerCmd.Apply<StrengthPower>(
                 choiceContext,
-                cardPlay.Target,
-                count,
+                cardPlay.Card.Owner.Creature,
+                 DynamicVars.Cards.BaseValue,
                 base.Owner.Creature,
                 this
             );
+            return;
         }
     }
 
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(2);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>

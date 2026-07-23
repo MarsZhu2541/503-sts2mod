@@ -92,10 +92,11 @@ public class DiceOrb : ModOrbTemplate
         return random;
     }
 
-    public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext, bool resolveExtras = true)
+    public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext, Player player, bool triggerLuckier = true)
     {
         int random;
-        var loaded = Owner.Creature.Powers.OfType<LoadedDicePower>().FirstOrDefault();
+        var loaded = player.Creature.Powers.OfType<LoadedDicePower>().FirstOrDefault();
+        
 
         if (QueuedBasePoint.HasValue)
         {
@@ -126,40 +127,27 @@ public class DiceOrb : ModOrbTemplate
         }
 
         CurrentDicePoint = random;
-        var luckyPower = Owner.Creature.Powers.OfType<LuckyPower>();
+        var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
         int luckyPowerAmount = luckyPower.FirstOrDefault()?.Amount ?? 0;
-        if (luckyPowerAmount > 0)
+        if (luckyPowerAmount > 0 && triggerLuckier)
         {
-            var enhanceLuckyPower = Owner.Creature.Powers.OfType<EnhanceLucky>();
+            var enhanceLuckyPower = player.Creature.Powers.OfType<EnhanceLucky>();
             int enhancedAmount = enhanceLuckyPower.FirstOrDefault()?.Amount ?? 0;
             CurrentDicePoint += enhancedAmount + 1;
-            DiceTextVfx.ShowInfo(Owner.Creature, $"{random} + {enhancedAmount + 1} = {CurrentDicePoint}");
+            DiceTextVfx.ShowInfo(player.Creature, $"{random} + {enhancedAmount + 1} = {CurrentDicePoint}");
         }
         else
         {
-            DiceTextVfx.ShowInfo(Owner.Creature, $"{random}");
-        }
-
-        if (resolveExtras)
-        {
-            await ResolveAfterRoll(choiceContext, CurrentDicePoint);
+            DiceTextVfx.ShowInfo(player.Creature, $"{random}");
         }
 
         return CurrentDicePoint;
     }
 
-    private async Task ResolveAfterRoll(PlayerChoiceContext choiceContext, int point)
+    public async Task rollAndBet(PlayerChoiceContext choiceContext, Player player)
     {
-        var armor = Owner.Creature.GetPower<DiceArmorPower>();
-        if (armor != null && armor.Amount > 0 && point >= 6)
-        {
-            armor.Flash();
-            await CreatureCmd.GainBlock(
-                Owner.Creature,
-                new BlockVar(armor.Amount, ValueProp.Move),
-                null);
-        }
 
+        var point = await RollSingleDice(choiceContext, player, false);
         if (PendingBet == PendingDiceBet.None)
         {
             return;
@@ -178,18 +166,18 @@ public class DiceOrb : ModOrbTemplate
 
         if (!won)
         {
-            DiceTextVfx.ShowInfo(Owner.Creature, "赌输了");
+            DiceTextVfx.ShowInfo(player.Creature, "赌输了");
             return;
         }
 
-        DiceTextVfx.ShowInfo(Owner.Creature, "赌中了!");
+        DiceTextVfx.ShowInfo(player.Creature, "赌中了!");
         if (bet is PendingDiceBet.High or PendingDiceBet.Low)
         {
-            await PlayerCmd.GainEnergy(1, Owner);
+            await PlayerCmd.GainEnergy(1, player);
         }
         else
         {
-            await CardPileCmd.Draw(choiceContext, 1, Owner);
+            await CardPileCmd.Draw(choiceContext, 1, player);
         }
     }
 
@@ -212,8 +200,7 @@ public class DiceOrb : ModOrbTemplate
 
     public static async Task<int> getRollPoint(
         PlayerChoiceContext choiceContext,
-        Player player,
-        bool resolveExtras = true)
+        Player player)
     {
         var diceOrb = Find(player);
         if (diceOrb == null)
@@ -221,7 +208,18 @@ public class DiceOrb : ModOrbTemplate
             return 1;
         }
 
-        return await diceOrb.RollSingleDice(choiceContext, resolveExtras);
+        return await diceOrb.RollSingleDice(choiceContext, player);
+    }
+
+    public static int getCurrentPoint(PlayerChoiceContext choiceContext, Player player)
+    {
+        var diceOrb = Find(player);
+        if (diceOrb == null)
+        {
+            return 1;
+        }
+
+        return diceOrb.CurrentDicePoint;
     }
 
     public static Task<bool> setForceSix(PlayerChoiceContext choiceContext, Player player, bool isForce)

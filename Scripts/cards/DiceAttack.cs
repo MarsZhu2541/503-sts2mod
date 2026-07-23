@@ -31,6 +31,8 @@ public class DiceAttack : ModCardTemplate
         PortraitPath: $"res://Mod503/images/cards/{GetType().Name}.png"
     );
 
+    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(3, ValueProp.Move)
@@ -47,18 +49,8 @@ public class DiceAttack : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
 
-        // 获取玩家当前拥有的所有充能球
-
-        var orbs = Owner.PlayerCombatState.OrbQueue.Orbs;
-
-        // 查找第一个 DiceOrb 类型的充能球
-        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
-
-        // 掷骰子刷新
-        await diceOrb.RollSingleDice(choiceContext);
-
         // 获取骰子点数，如果没有骰子球则默认为0
-        int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
+        int dicePoint = await DiceOrb.getRollPoint(choiceContext, Owner);
         // 计算最终伤害 = 基础伤害 + 骰子点数
         var finalDamage = DynamicVars.Damage.BaseValue + dicePoint;
 

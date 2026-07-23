@@ -17,7 +17,7 @@ public class GainLuckAmount : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
-    private int addedAmount = 2;
+    private int addedAmount = 3;
     // 卡牌类型
     private const CardType type = CardType.Skill;
     // 卡牌稀有度
@@ -26,7 +26,6 @@ public class GainLuckAmount : ModCardTemplate
     private const TargetType targetType = TargetType.Self;
     // 是否在卡牌图鉴中显示
     private const bool shouldShowInCardLibrary = true;
-    public override bool GainsBlock => true;
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
@@ -38,7 +37,6 @@ public class GainLuckAmount : ModCardTemplate
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(6m, ValueProp.Move),
         new CardsVar(addedAmount)
     ];
 
@@ -50,13 +48,11 @@ public class GainLuckAmount : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await PowerCmd.Apply<LuckyPower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.BaseValue, cardPlay.Card.Owner.Creature, null);
-        await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.BaseValue, ValueProp.Move), cardPlay);
     }
 
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(3m);
         DynamicVars.Cards.UpgradeValueBy(2);
     }
 

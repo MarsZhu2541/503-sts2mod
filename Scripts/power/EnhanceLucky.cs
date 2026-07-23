@@ -36,7 +36,7 @@ public class EnhanceLucky : ModPowerTemplate
         {
             return;
         }
-        Player player = Owner.Player;
+        Player player = cardPlay.Card.Owner;
         var luckyPower = player.Creature.Powers.OfType<LuckyPower>();
         luckyPower.FirstOrDefault()?.setLuckyBonusAsync(luckyPower.FirstOrDefault().LuckyBonus + 1);
     }

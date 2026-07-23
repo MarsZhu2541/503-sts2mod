@@ -27,7 +27,7 @@ public class CheatAttack : ModCardTemplate
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Mod503/images/cards/zwk.png"
+        PortraitPath: $"res://Mod503/images/cards/DiceAttack.png"
     // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
     // 如果使用自定义卡池，需要改下material，看添加人物章节的添加卡池部分
     // FramePath: "", // 卡牌背景
@@ -39,6 +39,8 @@ public class CheatAttack : ModCardTemplate
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(99, ValueProp.Move)
     ];
+
+    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 
     public CheatAttack() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)
     {

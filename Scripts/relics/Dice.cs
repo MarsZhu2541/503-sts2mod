@@ -43,7 +43,7 @@ public class Dice : ModRelicTemplate
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         // 获取当前战斗的 ID
-        var currentCombatId = player.Creature.CombatState?.GetHashCode() ?? 0;
+        var currentCombatId = Owner.Creature.CombatState?.GetHashCode() ?? 0;
         
         // 如果这场战斗已经触发过，跳过
         if (_lastCombatId == currentCombatId)
@@ -56,6 +56,6 @@ public class Dice : ModRelicTemplate
         
         // 添加 DiceOrb 充能球
         await OrbCmd.Channel<DiceOrb>(choiceContext, Owner);
-        await PowerCmd.Apply<LuckyPower>(choiceContext, player.Creature, 3, player.Creature, null);
+        await PowerCmd.Apply<LuckyPower>(choiceContext, Owner.Creature, 3, player.Creature, null);
     }
 }

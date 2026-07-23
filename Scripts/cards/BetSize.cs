@@ -45,6 +45,8 @@ public class BetSize : ModCardTemplate
         DiceTextVfx.ShowInfo(
             owner.Creature,
             diceOrb.PendingBet == PendingDiceBet.High ? "赌大!" : "赌小!");
+
+        await diceOrb.rollAndBet(choiceContext, cardPlay.Card.Owner);
     }
 
     protected override void OnUpgrade()
