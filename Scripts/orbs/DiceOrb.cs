@@ -15,7 +15,9 @@ public class DiceOrb : ModOrbTemplate
 {
 
     public int CurrentDicePoint { get; private set; } = 0;
-    public bool forceSix { get; private set; } = false;
+    public bool forceSix { get; set; } = false;
+    /// <summary>本回合骰子不会掷出1点。</summary>
+    public bool excludeOne { get; set; } = false;
     private static readonly Random _diceRng = new Random();
     // 被动效果数值，ModifyOrbValue表示是否吃集中等
     public override decimal PassiveVal => ModifyOrbValue(CurrentDicePoint);
@@ -44,6 +46,10 @@ public class DiceOrb : ModOrbTemplate
         if (forceSix)
         {
             random = 6;
+        }
+        else if (excludeOne && random == 1)
+        {
+            random = _diceRng.Next(2, 7);
         }
         CurrentDicePoint = random;
         var luckyPower = Owner.Creature.Powers.OfType<LuckyPower>();
@@ -94,7 +100,7 @@ public class DiceOrb : ModOrbTemplate
         return dicePoint;
     }
 
-        public static async Task<bool> setForceSix(PlayerChoiceContext choiceContext, Player player, bool isForce)
+    public static Task<bool> setForceSix(PlayerChoiceContext choiceContext, Player player, bool isForce)
     {
         // RitsuToastService.ShowInfo("setForceSix +" + isForce.ToString());
 
@@ -102,11 +108,24 @@ public class DiceOrb : ModOrbTemplate
 
         // 查找第一个 DiceOrb 类型的充能球
         var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
-    
-        // 设置强制掷出6点
-        diceOrb.forceSix = isForce;
 
-        // 获取骰子点数，如果没有骰子球则默认为0
-        return isForce;
+        // 设置强制掷出6点
+        if (diceOrb != null)
+        {
+            diceOrb.forceSix = isForce;
+        }
+
+        return Task.FromResult(isForce);
+    }
+
+    public static Task<bool> setExcludeOne(PlayerChoiceContext choiceContext, Player player, bool exclude)
+    {
+        var orbs = player.PlayerCombatState.OrbQueue.Orbs;
+        var diceOrb = orbs.OfType<DiceOrb>().FirstOrDefault();
+        if (diceOrb != null)
+        {
+            diceOrb.excludeOne = exclude;
+        }
+        return Task.FromResult(exclude);
     }
 }

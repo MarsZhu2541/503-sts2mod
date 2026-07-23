@@ -10,5 +10,17 @@
     "MOD503_POWER_CHEAT_STATUS_POWER.title": "出千形态",
     "MOD503_POWER_PRICE_POOL.description": "骰子点数为6及以上时，奖池加一。",
     "MOD503_POWER_PRICE_POOL.smartDescription": "骰子点数为6及以上时，奖池加一。",
-    "MOD503_POWER_PRICE_POOL.title": "奖池"
+    "MOD503_POWER_PRICE_POOL.title": "奖池",
+    "MOD503_POWER_JACKPOT_GOLD_POWER.description": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得[blue]{Gold}[/blue]金币。",
+    "MOD503_POWER_JACKPOT_GOLD_POWER.smartDescription": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得[blue]{Gold}[/blue]金币。",
+    "MOD503_POWER_JACKPOT_GOLD_POWER.title": "小奖兑现",
+    "MOD503_POWER_JACKPOT_CARD_POWER.description": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得一次卡牌奖励。",
+    "MOD503_POWER_JACKPOT_CARD_POWER.smartDescription": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得一次卡牌奖励。",
+    "MOD503_POWER_JACKPOT_CARD_POWER.title": "中奖开包",
+    "MOD503_POWER_JACKPOT_RELIC_POWER.description": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得一次遗物奖励。",
+    "MOD503_POWER_JACKPOT_RELIC_POWER.smartDescription": "本场最大奖池达到[blue]{Cards}[/blue]时，战斗胜利后额外获得一次遗物奖励。",
+    "MOD503_POWER_JACKPOT_RELIC_POWER.title": "头奖开箱",
+    "MOD503_POWER_NO_ONES_TURN_POWER.description": "本回合骰子不会出现点数1。",
+    "MOD503_POWER_NO_ONES_TURN_POWER.smartDescription": "本回合骰子不会出现点数1。",
+    "MOD503_POWER_NO_ONES_TURN_POWER.title": "绝无幺点"
 }
