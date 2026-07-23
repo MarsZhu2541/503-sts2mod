@@ -64,7 +64,8 @@ public class PricePool : ModPowerTemplate
             return;
         }
 
-        var rollPoint = await DiceOrb.getRollPoint(ctx, cardPlay.Card.Owner);
+        // 不触发护甲/下注结算，避免与卡牌自身掷骰重复结算
+        var rollPoint = await DiceOrb.getRollPoint(ctx, cardPlay.Card.Owner, resolveExtras: false);
         if (rollPoint > 5)
         {
             await PowerCmd.Apply<PricePool>(ctx, cardPlay.Card.Owner.Creature, 1, cardPlay.Card.Owner.Creature, null);

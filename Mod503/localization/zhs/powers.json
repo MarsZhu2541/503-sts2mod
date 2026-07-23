@@ -22,5 +22,11 @@
     "MOD503_POWER_JACKPOT_RELIC_POWER.title": "头奖开箱",
     "MOD503_POWER_NO_ONES_TURN_POWER.description": "本回合骰子不会出现点数1。",
     "MOD503_POWER_NO_ONES_TURN_POWER.smartDescription": "本回合骰子不会出现点数1。",
-    "MOD503_POWER_NO_ONES_TURN_POWER.title": "绝无幺点"
+    "MOD503_POWER_NO_ONES_TURN_POWER.title": "绝无幺点",
+    "MOD503_POWER_LOADED_DICE_POWER.description": "下次掷骰的基础点数必为6。",
+    "MOD503_POWER_LOADED_DICE_POWER.smartDescription": "接下来[blue]{Amount}[/blue]次掷骰的基础点数必为6。",
+    "MOD503_POWER_LOADED_DICE_POWER.title": "灌铅骰子",
+    "MOD503_POWER_DICE_ARMOR_POWER.description": "每当骰子点数为6及以上时，获得[blue]{Amount}[/blue]点护甲。",
+    "MOD503_POWER_DICE_ARMOR_POWER.smartDescription": "每当骰子点数为6及以上时，获得[blue]{Amount}[/blue]点护甲。",
+    "MOD503_POWER_DICE_ARMOR_POWER.title": "点石成甲"
 }
