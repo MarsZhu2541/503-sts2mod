@@ -48,7 +48,7 @@ public class PeekDice : ModCardTemplate
             if (energy >= rerollCost)
             {
                 await PlayerCmd.LoseEnergy(rerollCost, owner);
-                var rerolled = diceOrb.RerollQueuedBasePoint();
+                var rerolled = await diceOrb.RollSingleDice(choiceContext, owner);
                 DiceTextVfx.ShowInfo(owner.Creature, $"重摇: {rerolled}");
             }
             else

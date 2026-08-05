@@ -9,7 +9,7 @@ namespace Demo.Scripts;
 [ModInitializer(nameof(Init))]
 public class Entry
 {
-    public const string ModId = "demo";
+    public const string ModId = "Mod503";
     public static readonly Logger Logger = RitsuLibFramework.CreateLogger(ModId);
     // 初始化函数
     public static void Init()

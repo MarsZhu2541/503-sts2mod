@@ -1,9 +1,11 @@
+using System.Reflection;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -33,16 +35,15 @@ public class DiceOrb : ModOrbTemplate
     /// <summary>赌下次骰子的结果。</summary>
     public PendingDiceBet PendingBet { get; set; } = PendingDiceBet.None;
 
-    private static readonly Random _diceRng = new Random();
-
     public override decimal PassiveVal => ModifyOrbValue(CurrentDicePoint);
     public override decimal EvokeVal => ModifyOrbValue(0);
     public override Color DarkenedColor => new(0.1f, 0.2f, 0.5f);
-
     public override OrbAssetProfile AssetProfile => new(
         IconPath: "res://Mod503/images/relics/Dice.png",
         VisualsScenePath: "res://Mod503/scenes/dice_orb.tscn"
     );
+    private const string DICE_MUSIC = "res://Mod503/audio/dice.mp3";
+
 
     public override async Task AfterTurnStartOrbTrigger(PlayerChoiceContext choiceContext)
     {
@@ -64,10 +65,11 @@ public class DiceOrb : ModOrbTemplate
         }
         else
         {
-            var random = _diceRng.Next(1, 7);
+            Rng rng = base.CombatState.RunState.Rng.CombatTargets;
+            int random = rng.NextInt(1, 7);
             if (excludeOne && random == 1)
             {
-                random = _diceRng.Next(2, 7);
+                random = rng.NextInt(2, 7);
             }
             QueuedBasePoint = random;
             _queuedConsumesLoaded = false;
@@ -76,28 +78,11 @@ public class DiceOrb : ModOrbTemplate
         return QueuedBasePoint.Value;
     }
 
-    public int RerollQueuedBasePoint()
-    {
-        // 重摇时不再消耗灌铅（灌铅仍作用于真正掷出时）
-        var random = _diceRng.Next(1, 7);
-        if (excludeOne && random == 1)
-        {
-            random = _diceRng.Next(2, 7);
-        }
-        if (forceSix)
-        {
-            random = 6;
-        }
-        QueuedBasePoint = random;
-        return random;
-    }
-
     public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext, Player player, bool triggerLuckier = true)
     {
         int random;
         var loaded = player.Creature.Powers.OfType<LoadedDicePower>().FirstOrDefault();
-        
-
+        AudioManager.Play(DICE_MUSIC, 1.5f);
         if (QueuedBasePoint.HasValue)
         {
             random = QueuedBasePoint.Value;
@@ -119,10 +104,11 @@ public class DiceOrb : ModOrbTemplate
         }
         else
         {
-            random = _diceRng.Next(1, 7);
+            Rng rng = base.CombatState.RunState.Rng.CombatTargets;
+            random = rng.NextInt(1, 7);
             if (excludeOne && random == 1)
             {
-                random = _diceRng.Next(2, 7);
+                random = rng.NextInt(2, 7);
             }
         }
 

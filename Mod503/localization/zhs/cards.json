@@ -14,7 +14,7 @@
     "MOD503_CARD_DICE_ENERGY.title": "幸运补给",
     "MOD503_CARD_DICE_ENERGY.description": "获得[blue]{Energy}[/blue]点能量。\n若点数>5，则额外获得1点能量。",
     "MOD503_CARD_CHEAT_STATUS.title": "出千形态",
-    "MOD503_CARD_CHEAT_STATUS.description": "获得出千形态能力",
+    "MOD503_CARD_CHEAT_STATUS.description": "获得出千形态能力, 每回合前[blue]{Cards}[/blue]次骰子点数必为6。",
     "MOD503_CARD_DICE_AOE_ATTACK.title": "摇滚冲击",
     "MOD503_CARD_DICE_AOE_ATTACK.description": "对所有敌人造成[blue]{Damage:diff()} + 骰子点数[/blue]伤害。",
     "MOD503_CARD_DICE_MULTI_ATTACK.title": "连环骰击",
