@@ -26,6 +26,11 @@ public static class DiceTextVfx
         SpawnFloating(creature, text, 1, new Color(1f, 0.84f, 0.22f), 70);
     }
 
+        public static void ShowInfoWithDuration(Creature creature, string text, float duration)
+    {
+        SpawnFloatingWithDuration(creature, text, 1, new Color(1f, 0.84f, 0.22f), 70, duration);
+    }
+
     public static void SpawnPhaseOneLine(Creature creature)
     {
         var room = NCombatRoom.Instance;
@@ -83,6 +88,43 @@ public static class DiceTextVfx
                 Rng.Chaotic.NextFloat(80f, viewportSize.X - 80f),
                 Rng.Chaotic.NextFloat(80f, viewportSize.Y - 200f));
             StartPersistentJitter(vfx);
+        }
+    }
+
+        private static void SpawnFloatingWithDuration(Creature creature, string text, int count, Color color, int fontSize, float duration)
+    {
+        var room = NCombatRoom.Instance;
+        var creatureNode = room?.GetCreatureNode(creature);
+        if (room == null || creatureNode == null)
+            return;
+
+        for (var i = 0; i < count; i++)
+        {
+            var vfx = CreateLabel(text, color, fontSize);
+            room.CombatVfxContainer.AddChild(vfx);
+
+            vfx.GlobalPosition = creatureNode.VfxSpawnPosition
+                                 + new Vector2(
+                                     Rng.Chaotic.NextFloat(-170f, 170f),
+                                     Rng.Chaotic.NextFloat(-150f, -40f));
+
+            var floatDistance = Rng.Chaotic.NextFloat(70f, 130f);
+            var delay = i * 0.08f;
+
+            var tween = vfx.CreateTween().SetParallel();
+            tween.TweenProperty(vfx, "position:y", vfx.Position.Y - floatDistance, duration)
+                .SetDelay(delay)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Sine);
+            tween.TweenProperty(vfx, "modulate:a", 0f, duration)
+                .SetDelay(delay + 0.45f)
+                .SetEase(Tween.EaseType.In)
+                .SetTrans(Tween.TransitionType.Quad);
+            tween.TweenProperty(vfx, "scale", Vector2.One * 0.72f, duration)
+                .SetDelay(delay)
+                .SetEase(Tween.EaseType.Out)
+                .SetTrans(Tween.TransitionType.Quad);
+            tween.TweenCallback(Callable.From(vfx.QueueFree)).SetDelay(delay + duration);
         }
     }
 

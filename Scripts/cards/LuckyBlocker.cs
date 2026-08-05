@@ -16,12 +16,12 @@ public class LuckyBlocker : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
-    private int blocker = 8;
+    private int blocker = 10;
     private int luckier = 1;
     // 卡牌类型
     private const CardType type = CardType.Skill;
     // 卡牌稀有度
-    private const CardRarity rarity = CardRarity.Common;
+    private const CardRarity rarity = CardRarity.Basic;
     // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.Self;
     // 是否在卡牌图鉴中显示

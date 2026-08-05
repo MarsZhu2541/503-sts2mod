@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Mod503.Characters;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -12,6 +13,7 @@ namespace Mod503.Scripts;
 public class JackpotRelic : ModCardTemplate
 {
     private const int energyCost = 2;
+    private int count = 1;
     private const CardType type = CardType.Power;
     private const CardRarity rarity = CardRarity.Rare;
     private const TargetType targetType = TargetType.Self;
@@ -25,8 +27,13 @@ public class JackpotRelic : ModCardTemplate
     {
     }
 
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new CardsVar(count)
+    ];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PowerCmd.Apply<PricePool>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.BaseValue, cardPlay.Card.Owner.Creature, null);
         await PowerCmd.Apply<JackpotRelicPower>(
             choiceContext,
             cardPlay.Card.Owner.Creature,

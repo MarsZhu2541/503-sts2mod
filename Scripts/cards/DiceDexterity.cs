@@ -52,7 +52,7 @@ public class DiceDexterity : ModCardTemplate
         {
             await PowerCmd.Apply<DexterityPower>(
                 choiceContext,
-                cardPlay.Target,
+                cardPlay.Card.Owner.Creature,
                 count * 2,
                 base.Owner.Creature,
                 this
@@ -62,7 +62,7 @@ public class DiceDexterity : ModCardTemplate
         {
             await PowerCmd.Apply<DexterityPower>(
                 choiceContext,
-                cardPlay.Target,
+                cardPlay.Card.Owner.Creature,
                 count,
                 base.Owner.Creature,
                 this

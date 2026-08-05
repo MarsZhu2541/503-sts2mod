@@ -47,7 +47,7 @@ public class DiceDraw : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
-        if (rollPoint > 5)
+        if (rollPoint > 4)
         {
             await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue + 1, cardPlay.Card.Owner);
         }
@@ -60,7 +60,7 @@ public class DiceDraw : ModCardTemplate
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(2);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>

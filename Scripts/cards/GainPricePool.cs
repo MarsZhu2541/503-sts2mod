@@ -16,7 +16,7 @@ public class GainPricePool : ModCardTemplate
 {
     // 基础耗能
     private const int energyCost = 1;
-    private int count = 1;
+    private int count = 3;
     // 卡牌类型
     private const CardType type = CardType.Power;
     // 卡牌稀有度
@@ -50,7 +50,7 @@ public class GainPricePool : ModCardTemplate
     // 升级后的效果逻辑
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(4);
+        DynamicVars.Cards.UpgradeValueBy(3);
     }
 
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>

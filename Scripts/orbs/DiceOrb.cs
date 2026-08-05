@@ -30,8 +30,10 @@ public class DiceOrb : ModOrbTemplate
     /// <summary>本回合骰子不会掷出1点。</summary>
     public bool excludeOne { get; set; } = false;
     /// <summary>已预知/锁定的下一次基础点数。</summary>
-    public int? QueuedBasePoint { get; private set; }
-    private bool _queuedConsumesLoaded;
+    public int? peekedValue { get; private set; }
+    private bool peek;
+
+    public void SetPeek(bool value) => peek = value; // public set
     /// <summary>赌下次骰子的结果。</summary>
     public PendingDiceBet PendingBet { get; set; } = PendingDiceBet.None;
 
@@ -50,18 +52,13 @@ public class DiceOrb : ModOrbTemplate
         await Task.CompletedTask;
     }
 
-    public int EnsureQueuedBasePoint()
+    public int PeekPoint()
     {
-        if (QueuedBasePoint.HasValue)
-        {
-            return QueuedBasePoint.Value;
-        }
-
+        peek = true;
         var loaded = Owner.Creature.Powers.OfType<LoadedDicePower>().FirstOrDefault();
-        if (forceSix || (loaded?.Amount ?? 0) > 0)
+        if (forceSix && loaded.Amount > 0)
         {
-            QueuedBasePoint = 6;
-            _queuedConsumesLoaded = !forceSix && (loaded?.Amount ?? 0) > 0;
+            peekedValue = 6;
         }
         else
         {
@@ -71,27 +68,26 @@ public class DiceOrb : ModOrbTemplate
             {
                 random = rng.NextInt(2, 7);
             }
-            QueuedBasePoint = random;
-            _queuedConsumesLoaded = false;
+            peekedValue = random;
         }
 
-        return QueuedBasePoint.Value;
+        return peekedValue.Value;
     }
 
     public async Task<int> RollSingleDice(PlayerChoiceContext choiceContext, Player player, bool triggerLuckier = true)
     {
         int random;
         var loaded = player.Creature.Powers.OfType<LoadedDicePower>().FirstOrDefault();
-        AudioManager.Play(DICE_MUSIC, 1.5f);
-        if (QueuedBasePoint.HasValue)
+        AudioManager.Play(DICE_MUSIC, 3f);
+        if (peek && peekedValue.HasValue)
         {
-            random = QueuedBasePoint.Value;
-            if (_queuedConsumesLoaded && loaded != null && loaded.Amount > 0)
+            random = peekedValue.Value;
+            if (peek && loaded != null && loaded.Amount > 0)
             {
                 await PowerCmd.Decrement(loaded);
             }
-            QueuedBasePoint = null;
-            _queuedConsumesLoaded = false;
+            peekedValue = null;
+            peek = false;
         }
         else if (forceSix)
         {

@@ -50,13 +50,13 @@ public class Hypnoses : ModCardTemplate
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
         if (rollPoint > 5)
         {
-            await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
+            await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue*2, cardPlay.Card.Owner.Creature, null);
         }
         else
         {
-           await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
-           await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Card.Owner.Creature, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
+           await PowerCmd.Apply<WeakPower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
+           await PowerCmd.Apply<VulnerablePower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, cardPlay.Card.Owner.Creature, null);
         }
     }
 

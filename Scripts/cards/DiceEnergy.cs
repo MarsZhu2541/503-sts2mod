@@ -50,7 +50,7 @@ public class DiceEnergy : ModCardTemplate
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var rollPoint = await DiceOrb.getRollPoint(choiceContext, cardPlay.Card.Owner);
-        if (rollPoint > 5)
+        if (rollPoint > 4)
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue + 1, cardPlay.Card.Owner);
         }

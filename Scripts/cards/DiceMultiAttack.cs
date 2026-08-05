@@ -32,7 +32,7 @@ public class DiceMultiAttack : ModCardTemplate
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6, ValueProp.Move)
+        new DamageVar(4, ValueProp.Move)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
@@ -61,9 +61,9 @@ public class DiceMultiAttack : ModCardTemplate
         int dicePoint = diceOrb?.CurrentDicePoint ?? 1;
         // 计算最终伤害 = 基础伤害 + 骰子点数
         var repeat = 2;
-        if(dicePoint > 5)
+        if(dicePoint > 4)
         {
-            repeat = 4;
+            repeat = 3;
         }
 
         // 执行攻击

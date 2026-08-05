@@ -15,7 +15,7 @@ namespace Mod503.Scripts;
 public class CheatAttack : ModCardTemplate
 {
     // 基础耗能
-    private const int energyCost = 1;
+    private const int energyCost = 3;
     // 卡牌类型
     private const CardType type = CardType.Attack;
     // 卡牌稀有度
