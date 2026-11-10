@@ -13,13 +13,24 @@ public class LoadedDicePower : ModPowerTemplate
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+    public override bool GainsBlock => true;
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
+    private int blocker = 10;
+
+
 
     public override PowerAssetProfile AssetProfile => new(
         IconPath: "res://Mod503/images/powers/loaded_dice_64.png",
         BigIconPath: "res://Mod503/images/powers/loaded_dice_256.png"
     );
 
-        public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar(blocker, ValueProp.Move)
+    ];
+    
+    
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         if (Amount <= 0
             || cardPlay.Card.Owner != Owner.Player
@@ -31,9 +42,11 @@ public class LoadedDicePower : ModPowerTemplate
         }
         await DiceOrb.setForceSix(new ThrowingPlayerChoiceContext(), cardPlay.Card.Owner, false);
         await PowerCmd.Decrement(this);
+        await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.BaseValue, ValueProp.Move), cardPlay);
+
     }
 
-        public override async Task BeforeCardPlayed(CardPlay cardPlay)
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if (Amount <= 0
             || cardPlay.Card.Owner != Owner.Player

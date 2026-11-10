@@ -31,7 +31,7 @@ public class LuckyBlocker : ModCardTemplate
 
     // 卡图资源
     public override CardAssetProfile AssetProfile => new(
-        PortraitPath: $"res://Mod503/images/cards/IronMountainLean.png"
+        PortraitPath: $"res://Mod503/images/cards/LuckyBlocker.png"
     );
     
 

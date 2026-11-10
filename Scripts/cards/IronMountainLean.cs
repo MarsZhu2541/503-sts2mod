@@ -42,7 +42,7 @@ public class IronMountainLean : ModCardTemplate
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(3m, ValueProp.Move)
+        new BlockVar(5m, ValueProp.Move)
     ];
 
     public IronMountainLean() : base(energyCost, type, rarity, targetType, shouldShowInCardLibrary)

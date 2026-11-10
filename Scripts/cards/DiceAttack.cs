@@ -35,7 +35,7 @@ public class DiceAttack : ModCardTemplate
 
     // 卡牌基础数值
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3, ValueProp.Move)
+        new DamageVar(5, ValueProp.Move)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [
